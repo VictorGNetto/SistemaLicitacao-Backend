@@ -12,17 +12,17 @@ if ($documentoBaseID === "DocB-0001") {
             [
                 "nome" => "Objeto",
                 "itens" => [
-                    ["tipo" => "nota", "itemID" => 'nota-001'],
+                    ["tipo" => "nota", "itemID" => 'fbfbre'],
                     ["tipo" => "texto", "itemID" => 'fds-erqa-wer'],
                     ["tipo" => "opcoes", "itemID" => 'qio-abeq-qqa'],
-                    ["tipo" => "nota", "itemID" => 'nota-002']
+                    ["tipo" => "nota", "itemID" => 'hygzyi']
                 ]
             ],
             [
                 "nome" => "Justificativa",
                 "itens" => [
-                    ["tipo" => "nota", "itemID" => 'nota-003'],
-                    ["tipo" => "nota", "itemID" => 'nota-004']
+                    ["tipo" => "nota", "itemID" => 'mjuuov'],
+                    ["tipo" => "nota", "itemID" => 'mzlqdt']
                 ]
             ]
         ]
@@ -35,7 +35,7 @@ if ($documentoBaseID === "DocB-0001") {
             [
                 "nome" => "Objeto",
                 "itens" => [
-                    ["tipo" => "nota", "itemID" => 'nota-005'],
+                    ["tipo" => "nota", "itemID" => 'mznaot'],
                     ["tipo" => "texto", "itemID" => 'abc-erqa-wer'],
                     ["tipo" => "opcoes", "itemID" => 'abc-abeq-qqa']
                 ]
@@ -50,14 +50,14 @@ if ($documentoBaseID === "DocB-0001") {
             [
                 "nome" => "Objeto",
                 "itens" => [
-                    ["tipo" => "nota", "itemID" => 'nota-006']
+                    ["tipo" => "nota", "itemID" => 'orcgdr']
                 ]
             ],
             [
                 "nome" => "Justificativa",
                 "itens" => [
-                    ["tipo" => "nota", "itemID" => 'nota-007'],
-                    ["tipo" => "nota", "itemID" => 'nota-008']
+                    ["tipo" => "nota", "itemID" => 'rxzikt'],
+                    ["tipo" => "nota", "itemID" => 'scfmdi']
                 ]
             ]
         ]
