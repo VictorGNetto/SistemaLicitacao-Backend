@@ -1,9 +1,11 @@
 <?php
 
-$listaDocumentosBase = [
-    ["documentoBaseID" => "auj", "nomeDocumentoBase" => "Termo de Referência - Compra Direta"],
-    ["documentoBaseID" => "iko", "nomeDocumentoBase" => "Estudo Técnico Preliminar - Licitação"],
-    ["documentoBaseID" => "qoi", "nomeDocumentoBase" => "Termo de Referência - Licitação"],
-];
+require_once "db-config.php";
 
-echo json_encode(["listaDocumentosBase" => $listaDocumentosBase]);
+$sql = "SELECT documentoBaseID, nomeDocumentoBase FROM documentos_base";
+$result = mysqli_query($link, $sql);
+$baseDocumentList = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+mysqli_close($link);
+
+echo json_encode(["listaDocumentosBase" => $baseDocumentList]);
