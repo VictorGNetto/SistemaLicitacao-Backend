@@ -1,14 +1,32 @@
 <?php
 
+/**
+ * - Recebe o ID de um item para ser salvado via GET
+ * - Se o ID for de um item novo (começado com 'item novo'),
+ *   encontra um ID ainda não usado no banco de dados
+ * - Salva os dados do Item no banco de dados
+ * - Retorna o ID do Item salvado
+ */
+
 require_once "db-config.php";
 require_once "id-generator.php";
 
-// - Obtém um ID aleatório
-// - Verifica se esse ID está no Banco de Dados
-// - Se sim, repete o processo; Se não, retorna o ID obtido
-function getUnusedItemID()
-{
-    return n_letters_id(6);
+function getUnusedItemID($conn) {
+    // 26^6 ~ 300M IDs
+    $itemID = n_letters_id(6);
+
+    while (true) {
+        try {
+            $sql = "SELECT * FROM itens WHERE itemID = '" . $itemID . "'";
+            $result = $conn->query($sql);
+            if ($result->rowCount() === 0) break;
+            $itemID = n_letters_id(6);
+        } catch (PDOException $e) {
+            die("ERROR: Could not able to execute $sql. " . $e->getMessage());
+        }
+    }
+
+    return $itemID;
 }
 
 // Obtém o conteúdo da requisição HTTP POST
@@ -18,37 +36,41 @@ $requestBodyData = json_decode($requestBody);
 $itemID = $requestBodyData->itemID;
 $data = $requestBodyData->dados;
 
-// Verifica se o item precisa ser salvo ou atualizado
+// Verifica se o item precisa ser salvado ou atualizado
 $itemIsNew = str_starts_with($itemID, "item novo");
 
 if ($itemIsNew) {
-    $itemID = getUnusedItemID();
+    $itemID = getUnusedItemID($conn);
 
-    $sql = "INSERT INTO itens (itemID, dados) VALUES (?, ?)";
-    
-    if ($stmt = mysqli_prepare($link, $sql)) {
-        mysqli_stmt_bind_param($stmt, "ss", $param_itemID, $param_data);
-        $param_itemID = $itemID;
-        $param_data = $data;
+    try {
+        // Prepara a declaração
+        $sql = "INSERT INTO itens (itemID, dados) VALUES (:itemID, :dados)";
+        $stmt = $conn->prepare($sql);
 
-        mysqli_stmt_execute($stmt);
+        // Vincula parâmetros à declaração
+        $stmt->bindParam(":itemID", $itemID, PDO::PARAM_STR);
+        $stmt->bindParam(":dados", $data, PDO::PARAM_STR);
+
+        $stmt->execute();
+    } catch (PDOException $e) {
+        die("ERROR: Could not able to execute $sql. " . $e->getMessage());
     }
-
-    mysqli_stmt_close($stmt);
 } else {
-    $sql = "UPDATE itens SET dados=? WHERE itemID=?";
+    try {
+        // Prepara a declaração
+        $sql = "UPDATE itens SET dados = :dados WHERE itemID = :itemID";
+        $stmt = $conn->prepare($sql);
 
-    if ($stmt = mysqli_prepare($link, $sql)) {
-        mysqli_stmt_bind_param($stmt, "ss", $param_data, $param_itemID);
-        $param_data = $data;
-        $param_itemID = $itemID;
+        // Vincula parâmetros à declaração
+        $stmt->bindParam(":itemID", $itemID, PDO::PARAM_STR);
+        $stmt->bindParam(":dados", $data, PDO::PARAM_STR);
 
-        mysqli_stmt_execute($stmt);
+        $stmt->execute();
+    } catch (PDOException) {
+        die("ERROR: Could not able to execute $sql. " . $e->getMessage());
     }
-
-    mysqli_stmt_close($stmt);
 }
 
-mysqli_close($link);
+unset($conn);
 
 echo json_encode( ["itemID" =>  $itemID]);
