@@ -12,7 +12,6 @@ try {
     $sql = "SELECT documentoBaseID, nomeDocumentoBase FROM documentos_base";
     $result = $conn->query($sql);
     $baseDocumentList = $result->fetchAll();
-
 } catch (PDOException $e) {
     die ("ERROR: Could not able to execute $sql. " . $e->getMessage()); 
 }
