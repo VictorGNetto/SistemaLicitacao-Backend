@@ -28,6 +28,7 @@ while (true) {
 try {
     $baseDocumentName = "Documento Base Novo";
     $sections = '[{"nome":"1ª Seção","itens":[]}]';
+    
     $sql = "INSERT INTO documentos_base (documentoBaseID, nomeDocumentoBase, secoes) VALUES ('" .
             $baseDocumentID . "', '" .
             $baseDocumentName . "', '" .
