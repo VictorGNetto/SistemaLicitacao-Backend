@@ -18,9 +18,7 @@ $requestBodyData = json_decode($requestBody);
 
 $itemID = $requestBodyData->itemID;
 $data = $requestBodyData->dados;
-
-// Verifica se o item precisa ser salvado ou atualizado
-$itemIsNew = str_starts_with($itemID, "item novo");
+$itemIsNew = $requestBodyData->novo;
 
 if ($itemIsNew) {
     $itemID = get_unused_itemID($conn);
