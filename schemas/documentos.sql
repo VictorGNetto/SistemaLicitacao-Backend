@@ -5,7 +5,9 @@ CREATE TABLE `documentos` (
   `status` varchar(50) DEFAULT NULL,
   `identificacao` varchar(500) DEFAULT NULL,
   `nomeDocumento` varchar(500) DEFAULT NULL,
-  `secoes` varchar(10000) DEFAULT NULL
+  `secoes` varchar(10000) DEFAULT NULL,
+  `criacao` TIMESTAMP,
+  `edicao` TIMESTAMP
 );
 
 ALTER TABLE `documentos`

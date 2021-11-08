@@ -1,9 +1,10 @@
 <?php
 
-
 require_once "id-generator.php";
 require_once "db-config.php";
 require_once "utils.php";
+
+date_default_timezone_set("America/Sao_Paulo");
 
 function clone_item($itemID, $conn) {
     $newItemID = get_unused_itemID($conn);
@@ -41,6 +42,8 @@ $status = "Aberto";
 $identification = "";
 $documentName = "";
 $sections = "";
+$creation = date("Y-m-d H:i:s");
+$edition = date("Y-m-d H:i:s");
 
 $documentID = n_letters_id(5);
 
@@ -81,14 +84,17 @@ try {
 try {
     $sql = "INSERT INTO documentos
             (documentoID, autorID, documentoBaseID, status,
-            identificacao, nomeDocumento, secoes) VALUES ('" .
+            identificacao, nomeDocumento, secoes,
+            criacao, edicao) VALUES ('" .
             $documentID . "', '" .
             $authorID . "', '" .
             $baseDocumentID . "', '" .
             $status . "', '" .
             $identification . "', '" .
             $documentName . "', '" .
-            $sections . "')";
+            $sections . "', '" .
+            $creation . "', '" .
+            $edition . "')";
     
     $conn->exec($sql);
 } catch (PDOException $e) {

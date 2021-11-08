@@ -6,6 +6,9 @@
  * - Salva esses dados no banco de dados
  */
 
+date_default_timezone_set("America/Sao_Paulo");
+$edition = date("Y-m-d H:i:s");
+
 require_once "db-config.php";
 
 // Obtém o conteúdo da requisição HTTP POST
@@ -19,6 +22,7 @@ $sections = json_encode($requestBodyData->secoes, JSON_UNESCAPED_UNICODE);
 try {
     $sql = "UPDATE documentos SET nomeDocumento = '" . $documentName .
             "', secoes = '" . $sections .
+            "', edicao = '" . $edition .
             "' WHERE documentoID = '" . $documentID . "'";
     $conn->exec($sql);
 } catch (PDOException $e) {
