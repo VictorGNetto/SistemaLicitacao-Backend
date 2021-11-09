@@ -47,11 +47,11 @@ if ($itemIsNew) {
         $stmt->bindParam(":dados", $data, PDO::PARAM_STR);
 
         $stmt->execute();
-    } catch (PDOException) {
+    } catch (PDOException $e) {
         die("ERROR: Could not able to execute $sql. " . $e->getMessage());
     }
 }
 
 unset($conn);
 
-echo json_encode( ["itemID" =>  $itemID]);
+echo json_encode(["itemID" => $itemID]);
