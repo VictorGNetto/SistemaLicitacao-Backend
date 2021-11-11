@@ -38,7 +38,7 @@ function clone_item($itemID, $conn) {
 $documentID = "";
 $authorID = $_GET["autorID"];
 $baseDocumentID = $_GET["documentoBaseID"];
-$status = "Aberto";
+$status = "Em Edição";
 $identification = "";
 $documentName = "";
 $sections = "";

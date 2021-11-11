@@ -2,15 +2,18 @@
 
 require_once "db-config.php";
 
-$authorID = $_GET["autorID"];
-
 $documentList = array();
 
 try {
-    $sql = "SELECT documentoID, identificacao, status, criacao, edicao FROM documentos WHERE autorID = '" . $authorID . "'";
-    $result = $conn->query($sql);
-    $documentList = $result->fetchAll();
-
+    if (isset($_GET["autorID"])) {
+        $sql = "SELECT documentoID, identificacao, status, criacao, edicao FROM documentos WHERE autorID = '" . $_GET["autorID"] . "'";
+        $result = $conn->query($sql);
+        $documentList = $result->fetchAll();
+    } else if (isset($_GET["status"])) {
+        $sql = "SELECT documentoID, identificacao, status, criacao, edicao FROM documentos WHERE status = '" . $_GET["status"] . "'";
+        $result = $conn->query($sql);
+        $documentList = $result->fetchAll();
+    }
 } catch (PDOException $e) {
     die ("ERROR: Could not able to execute $sql. " . $e->getMessage()); 
 }
