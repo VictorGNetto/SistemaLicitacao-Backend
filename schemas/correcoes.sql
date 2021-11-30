@@ -8,5 +8,5 @@ ALTER TABLE `correcoes`
 COMMIT;
 
 ALTER TABLE `correcoes`
-  ADD FOREIGN KEY (`documentoID`) REFERENCES `documentos`(`documentoID`);
+  ADD FOREIGN KEY (`documentoID`) REFERENCES `documentos`(`documentoID`) ON DELETE CASCADE;
 COMMIT;
