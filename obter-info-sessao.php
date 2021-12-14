@@ -2,7 +2,7 @@
 
 $hash_sessao = $_GET["sessaoID"];   // Sessão
 $hash_sistema = "bc1b07991f7a49331bf9c45b5baa3ec4";  // Sistema
-$ip = "10.232.94.64";
+$ip = "10.232.81.101";
 
 // if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 //     $ip = $_SERVER['HTTP_CLIENT_IP'];

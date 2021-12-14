@@ -6,11 +6,11 @@ $documentList = array();
 
 try {
     if (isset($_GET["autorID"])) {
-        $sql = "SELECT documentoID, identificacao, status, criacao, edicao FROM documentos WHERE autorID = '" . $_GET["autorID"] . "'";
+        $sql = "SELECT documentoID, identificacao, status, criacao, edicao FROM documentos WHERE autorID = '" . $_GET["autorID"] . "' ORDER BY edicao DESC";
         $result = $conn->query($sql);
         $documentList = $result->fetchAll();
     } else if (isset($_GET["status"])) {
-        $sql = "SELECT documentoID, identificacao, status, criacao, edicao FROM documentos WHERE status = '" . $_GET["status"] . "'";
+        $sql = "SELECT documentoID, identificacao, status, criacao, edicao FROM documentos WHERE status = '" . $_GET["status"] . "' ORDER BY edicao DESC";
         $result = $conn->query($sql);
         $documentList = $result->fetchAll();
     }
