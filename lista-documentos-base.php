@@ -9,7 +9,7 @@ require_once "db-config.php";
 $baseDocumentList = array();
 
 try {
-    $sql = "SELECT documentoBaseID, nomeDocumentoBase FROM documentos_base ORDER BY nomeDocumentoBase ASC";
+    $sql = "SELECT documentoBaseID, identificacaoDocumentoBase FROM documentos_base ORDER BY identificacaoDocumentoBase ASC";
     $result = $conn->query($sql);
     $baseDocumentList = $result->fetchAll();
 } catch (PDOException $e) {

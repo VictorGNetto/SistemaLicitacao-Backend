@@ -14,10 +14,11 @@ $baseDocumentName = "";
 $sections = [];
 
 try {
-    $sql = "SELECT nomeDocumentoBase, secoes FROM documentos_base WHERE documentoBaseID = '" . $baseDocumentID . "'";
+    $sql = "SELECT identificacaoDocumentoBase, tituloDocumento, secoes FROM documentos_base WHERE documentoBaseID = '" . $baseDocumentID . "'";
     $result = $conn->query($sql);
     $row = $result->fetch();
-    $baseDocumentName = $row["nomeDocumentoBase"];
+    $baseDocumentIdentification = $row["identificacaoDocumentoBase"];
+    $documentoTitle = $row["tituloDocumento"];
     $sections = json_decode($row["secoes"]);
     
 } catch (PDOException $e) {
@@ -28,7 +29,8 @@ unset($conn);
 
 $documentoBase = [
     "documentoBaseID" => $baseDocumentID,
-    "nomeDocumentoBase" => $baseDocumentName,
+    "identificacaoDocumentoBase" => $baseDocumentIdentification,
+    "tituloDocumento" => $documentoTitle,
     "secoes" => $sections
 ];
 

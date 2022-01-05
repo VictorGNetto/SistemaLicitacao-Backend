@@ -26,12 +26,14 @@ while (true) {
 }
 
 try {
-    $baseDocumentName = "Documento Base Novo";
+    $baseDocumentIdentification = "Documento Base Novo";
+    $documentoTitle = "Título do Documento";
     $sections = '[{"nome":"1ª Seção","itens":[]}]';
     
-    $sql = "INSERT INTO documentos_base (documentoBaseID, nomeDocumentoBase, secoes) VALUES ('" .
+    $sql = "INSERT INTO documentos_base (documentoBaseID, identificacaoDocumentoBase, tituloDocumento, secoes) VALUES ('" .
             $baseDocumentID . "', '" .
-            $baseDocumentName . "', '" .
+            $baseDocumentIdentification . "', '" .
+            $documentoTitle . "', '" .
             $sections . "')";
     
     $conn->exec($sql);

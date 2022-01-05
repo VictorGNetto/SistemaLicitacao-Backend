@@ -36,7 +36,8 @@ function clone_item($itemID, $conn) {
 $baseDocumentID = $_GET["documentoBaseID"];  // ID do Documento Base original
 
 $newBaseDocumentID = n_letters_id(3);        // ID do nono Documento Base
-$baseDocumentName = "";
+$baseDocumentIdentification = "";
+$documentTitle = "";
 $sections = "";
 
 // Encontra um ID ainda não usado para o Documento Base
@@ -53,10 +54,11 @@ while (true) {
 
 // Clona os dados do Documento Base para o novo Documento Base
 try {
-    $sql = "SELECT nomeDocumentoBase, secoes FROM documentos_base WHERE documentoBaseID = '" . $baseDocumentID . "'";
+    $sql = "SELECT identificacaoDocumentoBase, tituloDocumento, secoes FROM documentos_base WHERE documentoBaseID = '" . $baseDocumentID . "'";
     $result = $conn->query($sql);
     $row = $result->fetch();
-    $baseDocumentName = $row["nomeDocumentoBase"] . " [Cópia]";
+    $baseDocumentIdentification = $row["identificacaoDocumentoBase"] . " [Cópia]";
+    $documentTitle = $row["tituloDocumento"];
     $sections = json_decode($row["secoes"]);
     
     foreach ($sections as $section) {
@@ -73,9 +75,10 @@ try {
 }
 
 try {
-    $sql = "INSERT INTO documentos_base (documentoBaseID, nomeDocumentoBase, secoes) VALUES ('" .
+    $sql = "INSERT INTO documentos_base (documentoBaseID, identificacaoDocumentoBase, tituloDocumento, secoes) VALUES ('" .
             $newBaseDocumentID . "', '" .
-            $baseDocumentName . "', '" .
+            $baseDocumentIdentification . "', '" .
+            $documentTitle . "', '" .
             $sections . "')";
     
     $conn->exec($sql);

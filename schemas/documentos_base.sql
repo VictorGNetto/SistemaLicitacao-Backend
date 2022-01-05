@@ -1,6 +1,7 @@
 CREATE TABLE `documentos_base` (
   `documentoBaseID` char(3) NOT NULL,
-  `nomeDocumentoBase` varchar(500) DEFAULT NULL,
+  `identificacaoDocumentoBase` varchar(500) DEFAULT NULL,
+  `tituloDocumento` varchar(500) DEFAULT NULL,
   `secoes` varchar(10000) DEFAULT NULL
 );
 

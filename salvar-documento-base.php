@@ -13,11 +13,13 @@ $requestBody = file_get_contents('php://input');
 $requestBodyData = json_decode($requestBody);
 
 $baseDocumentID = $requestBodyData->documentoBaseID;
-$baseDocumentName = $requestBodyData->nomeDocumentoBase;
+$baseDocumentIdentification = $requestBodyData->identificacaoDocumentoBase;
+$documentTitle = $requestBodyData->tituloDocumento;
 $sections = json_encode($requestBodyData->secoes, JSON_UNESCAPED_UNICODE);
 
 try {
-    $sql = "UPDATE documentos_base SET nomeDocumentoBase = '" . $baseDocumentName .
+    $sql = "UPDATE documentos_base SET identificacaoDocumentoBase = '" . $baseDocumentIdentification .
+            "', tituloDocumento = '" . $documentTitle .
             "', secoes = '" . $sections .
             "' WHERE documentoBaseID = '" . $baseDocumentID . "'";
     $conn->exec($sql);

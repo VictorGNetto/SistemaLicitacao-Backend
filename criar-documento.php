@@ -61,11 +61,11 @@ while (true) {
 
 // Clona os dados do Documento Base para o novo Documento
 try {
-    $sql = "SELECT nomeDocumentoBase, secoes FROM documentos_base WHERE documentoBaseID = '" . $baseDocumentID . "'";
+    $sql = "SELECT identificacaoDocumentoBase, tituloDocumento, secoes FROM documentos_base WHERE documentoBaseID = '" . $baseDocumentID . "'";
     $result = $conn->query($sql);
     $row = $result->fetch();
-    $identification = $row["nomeDocumentoBase"] . "-" . strtoupper($documentID);
-    $documentName = $row["nomeDocumentoBase"];
+    $identification = $row["identificacaoDocumentoBase"] . "-" . strtoupper($documentID);
+    $documentName = $row["tituloDocumento"];
     $sections = json_decode($row["secoes"]);
     
     foreach ($sections as $section) {
