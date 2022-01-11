@@ -40,7 +40,7 @@ $authorID = $_GET["autorID"];
 $baseDocumentID = $_GET["documentoBaseID"];
 $status = "Em Edição";
 $identification = "";
-$documentName = "";
+$documentTitle = "";
 $sections = "";
 $creation = date("Y-m-d H:i:s");
 $edition = date("Y-m-d H:i:s");
@@ -65,7 +65,7 @@ try {
     $result = $conn->query($sql);
     $row = $result->fetch();
     $identification = $row["identificacaoDocumentoBase"] . "-" . strtoupper($documentID);
-    $documentName = $row["tituloDocumento"];
+    $documentTitle = $row["tituloDocumento"];
     $sections = json_decode($row["secoes"]);
     
     foreach ($sections as $section) {
@@ -84,14 +84,14 @@ try {
 try {
     $sql = "INSERT INTO documentos
             (documentoID, autorID, documentoBaseID, status,
-            identificacao, nomeDocumento, secoes,
+            identificacao, tituloDocumento, secoes,
             criacao, edicao) VALUES ('" .
             $documentID . "', '" .
             $authorID . "', '" .
             $baseDocumentID . "', '" .
             $status . "', '" .
             $identification . "', '" .
-            $documentName . "', '" .
+            $documentTitle . "', '" .
             $sections . "', '" .
             $creation . "', '" .
             $edition . "')";

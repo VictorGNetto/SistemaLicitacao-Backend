@@ -7,11 +7,11 @@ $authorID = "";
 $baseDocumentID = "";
 $status = "";
 $identification = "";
-$documentName = "";
+$documentTitle = "";
 $sections = [];
 
 try {
-    $sql =  "SELECT autorID, documentoBaseID, status, identificacao, nomeDocumento, secoes
+    $sql =  "SELECT autorID, documentoBaseID, status, identificacao, tituloDocumento, secoes
             FROM documentos
             WHERE documentoID = '" . $documentID . "'";
     $result = $conn->query($sql);
@@ -20,7 +20,7 @@ try {
     $baseDocumentID = $row["documentoBaseID"];
     $status = $row["status"];
     $identification = $row["identificacao"];
-    $documentName = $row["nomeDocumento"];
+    $documentTitle = $row["tituloDocumento"];
     $sections = json_decode($row["secoes"]);
 
 } catch (PDOException $e) {
@@ -35,7 +35,7 @@ $document = [
     "documentoBaseID" => $baseDocumentID,
     "status" => $status,
     "identificacao" => $identification,
-    "nomeDocumento" => $documentName,
+    "tituloDocumento" => $documentTitle,
     "secoes" => $sections
 ];
 

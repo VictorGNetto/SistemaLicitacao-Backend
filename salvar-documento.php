@@ -16,11 +16,11 @@ $requestBody = file_get_contents('php://input');
 $requestBodyData = json_decode($requestBody);
 
 $documentID = $requestBodyData->documentoID;
-$documentName = $requestBodyData->nomeDocumento;
+$documentTitle = $requestBodyData->tituloDocumento;
 $sections = json_encode($requestBodyData->secoes, JSON_UNESCAPED_UNICODE);
 
 try {
-    $sql = "UPDATE documentos SET nomeDocumento = '" . $documentName .
+    $sql = "UPDATE documentos SET tituloDocumento = '" . $documentTitle .
             "', secoes = '" . $sections .
             "', edicao = '" . $edition .
             "' WHERE documentoID = '" . $documentID . "'";
